@@ -16,134 +16,108 @@
       margin: 0;
     }
 
+    .page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
     .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1030;
-      padding: 20px 0;
-      text-align: center;
+      padding: 20px 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .nav a {
-      color: #fff;
+      color: #999;
       text-decoration: none;
-      font-size: .75rem;
+      font-size: .7rem;
       letter-spacing: .15em;
       text-transform: uppercase;
-      margin: 0 10px;
-      opacity: .8;
-      transition: opacity .2s;
+      transition: color .2s;
     }
-    .nav a:hover { opacity: 1; }
+    .nav a:hover { color: #1a1a1a; }
 
     .hero {
-      height: 100vh;
-      min-height: 600px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=600&h=900&q=80') center / cover no-repeat;
-      position: relative;
-      color: #fff;
+      padding: 40px 20px 32px;
       text-align: center;
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,.3);
+    .hero-img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 2px;
+      margin-bottom: 28px;
+      background: #eee;
     }
-    .hero * { position: relative; z-index: 2; }
     .hero .label {
-      font-size: .65rem;
+      font-size: .6rem;
       letter-spacing: .3em;
       text-transform: uppercase;
-      opacity: .8;
-      margin-bottom: 16px;
+      color: #bbb;
+      margin-bottom: 12px;
     }
     .hero h1 {
-      font-size: clamp(3rem, 10vw, 5rem);
+      font-size: 2.8rem;
       font-weight: 200;
       letter-spacing: .02em;
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .hero p {
-      font-size: .85rem;
-      opacity: .85;
+      font-size: .8rem;
+      color: #999;
       font-weight: 300;
       letter-spacing: .05em;
-      max-width: 320px;
       line-height: 1.7;
-    }
-    .hero .scroll {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: .6rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      opacity: .6;
-      z-index: 2;
-    }
-    .hero .scroll-arrow {
-      display: block;
-      margin: 6px auto 0;
-      width: 1px; height: 24px;
-      background: rgba(255,255,255,.5);
+      max-width: 300px;
+      margin: 0 auto;
     }
 
     .section {
-      padding: 60px 0;
-    }
-
-    .narrow {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 0 20px;
+      padding: 40px 20px;
     }
 
     .section-title {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 200;
       letter-spacing: .03em;
       margin-bottom: 4px;
     }
     .section-desc {
-      font-size: .8rem;
-      color: #999;
-      margin-bottom: 28px;
+      font-size: .75rem;
+      color: #bbb;
+      margin-bottom: 24px;
     }
 
     .menu-cat {
-      font-size: .6rem;
+      font-size: .55rem;
       letter-spacing: .25em;
       text-transform: uppercase;
-      color: #bbb;
-      margin: 28px 0 10px;
-      padding-top: 10px;
+      color: #ccc;
+      margin: 24px 0 8px;
+      padding-top: 8px;
       border-top: 1px solid #eee;
     }
     .menu-item {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 10px 0;
+      padding: 8px 0;
     }
     .menu-item .name {
       font-weight: 400;
-      font-size: .9rem;
+      font-size: .85rem;
     }
     .menu-item .desc {
-      font-size: .75rem;
-      color: #aaa;
+      font-size: .7rem;
+      color: #bbb;
       margin-top: 1px;
     }
     .menu-item .price {
       font-weight: 400;
-      font-size: .9rem;
-      color: #888;
+      font-size: .85rem;
+      color: #999;
       margin-left: 16px;
       white-space: nowrap;
     }
@@ -151,48 +125,48 @@
     .info-grid {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
     .info-grid .item strong {
       display: block;
-      font-size: .6rem;
+      font-size: .55rem;
       letter-spacing: .2em;
       text-transform: uppercase;
-      color: #bbb;
+      color: #ccc;
       margin-bottom: 2px;
       font-weight: 600;
     }
     .info-grid .item {
-      font-size: .85rem;
+      font-size: .8rem;
       line-height: 1.6;
-      color: #555;
+      color: #666;
     }
 
     .btn-reserve {
       display: inline-block;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       border-radius: 40px;
-      padding: 11px 32px;
-      font-size: .75rem;
+      padding: 10px 30px;
+      font-size: .7rem;
       letter-spacing: .12em;
       text-transform: uppercase;
       text-decoration: none;
       color: #1a1a1a;
       transition: border-color .2s, background .2s;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     .btn-reserve:hover {
-      border-color: #999;
+      border-color: #bbb;
       background: #f3f1ed;
       color: #1a1a1a;
     }
 
     .footer {
-      border-top: 1px solid #eee;
-      padding: 24px 0;
+      padding: 24px 20px 32px;
       text-align: center;
-      font-size: .75rem;
-      color: #bbb;
+      font-size: .7rem;
+      color: #ccc;
+      border-top: 1px solid #eee;
     }
 
     .calc-fab {
@@ -219,30 +193,30 @@
       transform: scale(1.05);
     }
 
-    @media (max-width: 576px) {
-      .hero { min-height: 500px; }
-      .section { padding: 40px 0; }
+    @media (max-width: 520px) {
+      .page { max-width: 100%; }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="nav">
-    <a href="#menu">Menu</a>
-    <a href="#info">Info</a>
-    <a href="/calculator/">🧮</a>
-  </div>
+  <div class="page">
 
-  <section class="hero">
-    <div class="label">Since 2017</div>
-    <h1>VUNA</h1>
-    <p>Modern European cuisine<br />Seasonal ingredients, curated wines</p>
-    <div class="scroll">Scroll <span class="scroll-arrow"></span></div>
-  </section>
+    <div class="nav">
+      <a href="#menu">Menu</a>
+      <span style="font-size:.55rem; letter-spacing:.25em; text-transform:uppercase; color:#ccc;">Since 2017</span>
+      <a href="/calculator/">🧮</a>
+    </div>
 
-  <section id="menu" class="section">
-    <div class="narrow">
+    <div class="hero">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=480&h=640&q=80" alt="Restaurant dish" loading="lazy" />
+      <div class="label">Restaurant</div>
+      <h1>VUNA</h1>
+      <p>Modern European cuisine with seasonal ingredients and curated wines.</p>
+    </div>
+
+    <div id="menu" class="section">
       <h2 class="section-title">Menu</h2>
       <p class="section-desc">A selection of our current offerings</p>
 
@@ -308,10 +282,8 @@
         <div class="price">11</div>
       </div>
     </div>
-  </section>
 
-  <section id="info" class="section" style="background:#f3f1ed;">
-    <div class="narrow">
+    <div id="info" class="section" style="background:#f3f1ed; padding-left:20px; padding-right:20px;">
       <h2 class="section-title">Visit us</h2>
       <p class="section-desc">We look forward to welcoming you</p>
       <div class="info-grid">
@@ -333,13 +305,12 @@
       </div>
       <a href="#" class="btn-reserve">Reserve a table</a>
     </div>
-  </section>
 
-  <footer class="footer">
-    <div class="narrow">
+    <div class="footer">
       &copy; 2026 VUNA Restaurant
     </div>
-  </footer>
+
+  </div>
 
   <a href="/calculator/" class="calc-fab" title="Calculator">🧮</a>
 
