@@ -1,13 +1,6 @@
-// ===============================
-// 🧠 SMART RESULT MEMORY FEATURE
-// ===============================
-
-let LAST_RESULT = 0;
+var LAST_RESULT = 0;
 var currentExpression = "";
 
-// ------------------------------
-// Theme Toggle Logic
-// ------------------------------
 function toggleTheme() {
   const body = document.body;
   const btn = document.getElementById("theme-toggle");
@@ -25,7 +18,6 @@ function toggleTheme() {
   }
 }
 
-// Set theme on page load from localStorage
 window.addEventListener("DOMContentLoaded", function () {
   const theme = localStorage.getItem("theme");
   const body = document.body;
@@ -43,18 +35,13 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// ------------------------------
-// Calculator State
-// ------------------------------
-let left = "";
-let operator = "";
-let right = "";
-let steps = [];
-const MAX_STEPS = 6;
+function sinDeg(deg) { return Math.sin(deg * Math.PI / 180); }
+function cosDeg(deg) { return Math.cos(deg * Math.PI / 180); }
+function tanDeg(deg) { return Math.tan(deg * Math.PI / 180); }
+function asinDeg(val) { return Math.asin(val) * 180 / Math.PI; }
+function acosDeg(val) { return Math.acos(val) * 180 / Math.PI; }
+function atanDeg(val) { return Math.atan(val) * 180 / Math.PI; }
 
-// ------------------------------
-// Basic Calculator Functions
-// ------------------------------
 function appendToResult(value) {
   currentExpression += value.toString();
   updateResult();
@@ -84,7 +71,6 @@ function clearResult() {
   updateResult();
 }
 
-
 function normalizeExpression(expr) {
   return expr
     .replace(/asin\(/g, "asinDeg(")
@@ -99,6 +85,8 @@ function normalizeExpression(expr) {
     .replace(/\bpi\b/g, "Math.PI");
 }
 
+const SAFE_EXPR_RE = /^[\d+\-*/()%\s.,a-zA-Z]+$/;
+
 function percentToResult() {
   if (!currentExpression) return;
 
@@ -107,56 +95,52 @@ function percentToResult() {
   if (!match) {
     const num = parseFloat(currentExpression);
     if (isNaN(num)) return;
-
     currentExpression = (num / 100).toString();
   } else {
-    const leftPart = match[1];
-    const rightPart = match[3];
+    const baseExpr = match[1];
+    const op = match[2];
+    const percentNum = parseFloat(match[3]);
 
-    if (!rightPart) return;
+    if (isNaN(percentNum)) return;
 
-    let leftVal;
+    let baseValue;
 
     try {
-      leftVal = eval(leftPart);
+      baseValue = eval(baseExpr);
     } catch (e) {
-      leftVal = parseFloat(leftPart);
+      baseValue = parseFloat(baseExpr);
     }
 
-    const rightVal = parseFloat(rightPart);
-    if (isNaN(leftVal) || isNaN(rightVal)) return;
+    if (isNaN(baseValue)) return;
 
-    const percentVal = (leftVal * rightVal) / 100;
-
-    currentExpression = percentVal.toString();
+    const percentValue = (baseValue * percentNum) / 100;
+    currentExpression = baseExpr + op + percentValue;
   }
-
-  // 🔥 ADD THIS LINE
-  currentExpression += "*";
 
   updateResult();
 }
 
-// ------------------------------
-// Calculate Result
-// ------------------------------
 function calculateExpression(expression) {
   try {
-   
     let normalizedExpression = normalizeExpression(expression);
 
-    // 🧠 Replace "ans" with last result automatically
+    if (!SAFE_EXPR_RE.test(normalizedExpression)) {
+      return "Error";
+    }
+
     normalizedExpression = normalizedExpression.replace(
       /\bans\b/gi,
       LAST_RESULT,
     );
 
-    // Calculate result
+    if (normalizedExpression.includes("Error")) {
+      return "Error";
+    }
+
     let result = eval(normalizedExpression);
-    console.log("Calculated result for expression:", expression, "->", result);
- 
+
     if (isNaN(result) || !isFinite(result)) {
-      throw new Error();
+      return "Error";
     }
 
     return result;
@@ -164,23 +148,21 @@ function calculateExpression(expression) {
     return "Error";
   }
 }
+
 function calculateResult() {
   if (!currentExpression) return;
-    const display = document.getElementById("result"); 
-    // Calculate result
-    let result = calculateExpression(currentExpression);
-    result = String(result);
+  const display = document.getElementById("result");
+  let result = calculateExpression(currentExpression);
+  result = String(result);
 
-    // Save result for future expressions
+  if (result !== "Error") {
     LAST_RESULT = result;
+  }
 
-    // Display normally
-    display.value = result;
-
-    currentExpression = result;
-    updateResult();
+  display.value = result;
+  currentExpression = result;
+  updateResult();
 }
-
 
 function updateResult() {
   document.getElementById("result").value = currentExpression || "0";
