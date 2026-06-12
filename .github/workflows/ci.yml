@@ -54,27 +54,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
-          protocol: ftps
-          security: strict
-          dangerous-insecure-skip-verify: true
-          local-dir: ./
-          server-dir: /
-          exclude: |
-            .git/**
-            .gitignore
-            .github/**
-            .dockerignore
-            node_modules/**
-            test/**
-            eslint.config.mjs
-            jest.config.js
-            Dockerfile
-            nginx.conf
-            package.json
-            package-lock.json
+      - run: |
+          lftp -c "
+            set ftp:ssl-allow true
+            set ssl:verify-certificate no
+            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}
+            mirror -R . / \
+              --exclude .git/ --exclude .gitignore --exclude .github/ \
+              --exclude .dockerignore --exclude node_modules/ --exclude test/ \
+              --exclude eslint.config.mjs --exclude jest.config.js \
+              --exclude Dockerfile --exclude nginx.conf \
+              --exclude package.json --exclude package-lock.json
+          "
+        shell: bash
