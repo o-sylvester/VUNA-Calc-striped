@@ -4,202 +4,565 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Premium car rental services — affordable rates, wide fleet, flexible bookings." />
-  <title>VUNA Rentals — Premium Car Rental</title>
+  <meta name="description" content="VUNA Rentals — Find the perfect car for your next trip. Browse economy, sedan, SUV, and luxury rentals at the best rates." />
+  <title>VUNA Rentals — Car Rentals</title>
   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <style>
-    .hero {
-      background: linear-gradient(135deg, #0b2a4a 0%, #1a4a7a 100%);
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #fff;
+      color: #222;
+    }
+
+    /* Navbar */
+    .navbar-vuna {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+      padding: 14px 0;
+      transition: background .25s, box-shadow .25s;
+    }
+    .navbar-vuna.scrolled {
+      background: #fff;
+      box-shadow: 0 2px 16px rgba(0,0,0,.08);
+    }
+    .navbar-vuna .nav-link {
       color: #fff;
-      padding: 80px 0;
+      font-size: .9rem;
+      font-weight: 500;
+      padding: 8px 14px !important;
+      border-radius: 20px;
+      transition: background .2s;
+    }
+    .navbar-vuna .nav-link:hover { background: rgba(255,255,255,.15); }
+    .navbar-vuna.scrolled .nav-link { color: #222; }
+    .navbar-vuna.scrolled .nav-link:hover { background: #f5f5f5; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      height: 92vh;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80') center / cover no-repeat;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.35) 0%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.6) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
       text-align: center;
+      max-width: 720px;
+      padding: 0 20px;
     }
-    .hero h1 {
-      font-size: 3rem;
+    .hero-content h1 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
       font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      margin-bottom: 8px;
     }
-    .hero p {
+    .hero-content p {
       font-size: 1.2rem;
-      opacity: 0.9;
+      opacity: .9;
+      font-weight: 300;
+      margin-bottom: 28px;
     }
-    .feature-icon {
-      font-size: 2.5rem;
+
+    /* Search card (Airbnb style) */
+    .search-card {
+      background: #fff;
+      border-radius: 60px;
+      padding: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,.18);
+      margin: 0 auto;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    .car-card img {
-      height: 200px;
+    .search-card .search-item {
+      padding: 10px 22px;
+      text-align: left;
+      cursor: pointer;
+      border-radius: 60px;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .search-card .search-item:hover { background: #f5f5f5; }
+    .search-card .search-item .label {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: #222;
+      margin-bottom: 0;
+      line-height: 1.2;
+    }
+    .search-card .search-item .value {
+      font-size: .9rem;
+      color: #717171;
+      white-space: nowrap;
+    }
+    .search-card .search-divider {
+      width: 1px;
+      height: 32px;
+      background: #ddd;
+      flex-shrink: 0;
+    }
+    .search-card .btn-search {
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      padding: 12px 26px;
+      font-weight: 600;
+      font-size: .95rem;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .search-card .btn-search:hover { background: #000; }
+
+    /* Section titles (Airbnb style) */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      color: #717171;
+      font-size: 1rem;
+      margin-bottom: 28px;
+    }
+
+    /* Category pills */
+    .cat-pills {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .cat-pills::-webkit-scrollbar { display: none; }
+    .cat-pill {
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      border-radius: 40px;
+      background: #fff;
+      font-size: .9rem;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all .2s;
+      color: #222;
+      text-decoration: none;
+    }
+    .cat-pill:hover, .cat-pill.active {
+      background: #222;
+      color: #fff;
+      border-color: #222;
+    }
+
+    /* Car cards (Airbnb style) */
+    .car-card {
+      border: none;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      height: 100%;
+      background: #fff;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .car-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.1);
+      color: inherit;
+    }
+    .car-card .card-img-top {
+      height: 220px;
       object-fit: cover;
       background: #e9ecef;
     }
-    .btn-calculator {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 1000;
-      border-radius: 50px;
-      padding: 12px 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    .car-card .card-body { padding: 14px 16px 16px; }
+    .car-card .car-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 2px;
     }
-    footer {
-      background: #0b2a4a;
-      color: #ccc;
+    .car-card .car-meta {
+      font-size: .85rem;
+      color: #717171;
+      margin-bottom: 6px;
+    }
+    .car-card .car-price {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .car-card .car-price span {
+      font-weight: 400;
+      color: #717171;
+    }
+    .car-card .badge-feature {
+      background: #f5f5f5;
+      color: #222;
+      font-weight: 500;
+      font-size: .7rem;
+      border-radius: 40px;
+      padding: 3px 10px;
+    }
+
+    /* Feature grid */
+    .feature-box {
+      text-align: center;
+      padding: 20px 12px;
+    }
+    .feature-box .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    .feature-box h5 {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .feature-box p {
+      font-size: .9rem;
+      color: #717171;
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+    .footer-vuna {
+      border-top: 1px solid #ddd;
+      font-size: .9rem;
+      color: #717171;
+    }
+    .footer-vuna h6 {
+      font-weight: 600;
+      color: #222;
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 14px;
+    }
+    .footer-vuna a {
+      color: #717171;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .footer-vuna a:hover { color: #222; }
+    .footer-bottom {
+      border-top: 1px solid #eee;
+      padding: 18px 0;
+      font-size: .85rem;
+    }
+
+    /* Floating calculator FAB */
+    .fab-calculator {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 1050;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 22px;
+      font-size: .95rem;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fab-calculator:hover {
+      background: #000;
+      color: #fff;
+      transform: scale(1.04);
+    }
+
+    /* Spacer helper */
+    .section-pad { padding: 60px 0; }
+
+    @media (max-width: 576px) {
+      .hero { height: 80vh; min-height: 460px; }
+      .search-card { border-radius: 24px; padding: 12px; flex-direction: column; width: 100%; }
+      .search-card .search-divider { display: none; }
+      .search-card .search-item { width: 100%; text-align: center; }
+      .search-card .btn-search { width: 100%; justify-content: center; }
+      .fab-calculator { right: 16px; bottom: 16px; }
     }
   </style>
 </head>
 
 <body>
+
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background:#0b2a4a;">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="/">VUNA Rentals</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#fleet">Fleet</a></li>
-          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
+  <nav class="navbar-vuna" id="navbarVuna">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="/" class="text-decoration-none fw-bold" style="font-size:1.4rem; color:#fff; letter-spacing:-.02em;">
+        <span style="color:#FF5A5F;">●</span> VUNA
+      </a>
+      <div class="d-none d-md-flex align-items-center gap-1">
+        <a href="#fleet" class="nav-link">Browse</a>
+        <a href="#features" class="nav-link">Why us</a>
+        <a href="#footer" class="nav-link">Contact</a>
       </div>
+      <a href="/calculator/" class="text-decoration-none fw-semibold"
+         style="color:#fff; font-size:.9rem; padding:6px 16px; border:1px solid rgba(255,255,255,.5); border-radius:20px; transition:background .2s;">
+        🧮 Calculator
+      </a>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="container">
-      <h1>Drive Your Journey</h1>
-      <p class="mb-4">Premium car rental at affordable prices. Choose from a wide fleet of well-maintained vehicles.</p>
-      <a href="#fleet" class="btn btn-light btn-lg me-2">Browse Fleet</a>
-      <a href="#services" class="btn btn-outline-light btn-lg">Learn More</a>
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>The car you want, when you need it.</h1>
+      <p>Explore thousands of vehicles — from city runabouts to luxury cruisers.</p>
+      <div class="search-card">
+        <div class="search-item">
+          <div class="label">Location</div>
+          <div class="value">Anywhere</div>
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-item">
+          <div class="label">Pick-up</div>
+          <div class="value">Add dates</div>
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-item">
+          <div class="label">Drop-off</div>
+          <div class="value">Add dates</div>
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-item" style="padding-right:8px;">
+          <div class="label">Who</div>
+          <div class="value">1 driver</div>
+        </div>
+        <button class="btn-search">Search</button>
+      </div>
     </div>
   </section>
 
-  <!-- Why Choose Us -->
-  <section class="py-5">
+  <!-- Fleet section -->
+  <section id="fleet" class="section-pad">
     <div class="container">
-      <div class="row text-center g-4">
-        <div class="col-md-4">
-          <div class="feature-icon mb-2">🚗</div>
-          <h5>Wide Fleet</h5>
-          <p class="text-muted">Economy to luxury SUVs — we have the perfect car for every trip.</p>
+      <div class="d-flex align-items-end justify-content-between mb-3">
+        <div>
+          <h2 class="section-title">Popular vehicles</h2>
+          <p class="section-sub">Hand-picked cars for every journey</p>
         </div>
-        <div class="col-md-4">
-          <div class="feature-icon mb-2">💰</div>
-          <h5>Best Rates</h5>
-          <p class="text-muted">Transparent pricing with no hidden fees. Free cancellation up to 48h.</p>
+        <a href="#" class="text-decoration-none fw-semibold" style="font-size:.9rem; color:#222; flex-shrink:0;">
+          Show all →
+        </a>
+      </div>
+
+      <!-- Category pills -->
+      <div class="cat-pills mb-4">
+        <span class="cat-pill active">All</span>
+        <span class="cat-pill">Economy</span>
+        <span class="cat-pill">Sedan</span>
+        <span class="cat-pill">SUV</span>
+        <span class="cat-pill">Luxury</span>
+        <span class="cat-pill">Convertible</span>
+        <span class="cat-pill">Electric</span>
+      </div>
+
+      <!-- Car cards grid -->
+      <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-3">
+          <a class="car-card" href="#">
+            <img class="card-img-top" src="https://images.unsplash.com/photo-1541899481282-d53b1922d1c6?auto=format&fit=crop&w=400&q=80" alt="Toyota Yaris" loading="lazy">
+            <div class="card-body">
+              <div class="car-title">Toyota Yaris</div>
+              <div class="car-meta">Economy · 5 seats · Manual</div>
+              <div class="d-flex justify-content-between align-items-center mt-1">
+                <span class="car-price">$29 <span>/ day</span></span>
+                <span class="badge-feature">Unlimited km</span>
+              </div>
+            </div>
+          </a>
         </div>
-        <div class="col-md-4">
-          <div class="feature-icon mb-2">🔧</div>
-          <h5>24/7 Support</h5>
-          <p class="text-muted">Roadside assistance and customer support available around the clock.</p>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a class="car-card" href="#">
+            <img class="card-img-top" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=400&q=80" alt="Honda Civic" loading="lazy">
+            <div class="card-body">
+              <div class="car-title">Honda Civic</div>
+              <div class="car-meta">Sedan · 5 seats · Automatic</div>
+              <div class="d-flex justify-content-between align-items-center mt-1">
+                <span class="car-price">$39 <span>/ day</span></span>
+                <span class="badge-feature">Bluetooth</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a class="car-card" href="#">
+            <img class="card-img-top" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=400&q=80" alt="Ford Explorer" loading="lazy">
+            <div class="card-body">
+              <div class="car-title">Ford Explorer</div>
+              <div class="car-meta">SUV · 7 seats · Automatic</div>
+              <div class="d-flex justify-content-between align-items-center mt-1">
+                <span class="car-price">$59 <span>/ day</span></span>
+                <span class="badge-feature">AWD</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a class="car-card" href="#">
+            <img class="card-img-top" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&q=80" alt="Mercedes C-Class" loading="lazy">
+            <div class="card-body">
+              <div class="car-title">Mercedes C-Class</div>
+              <div class="car-meta">Luxury · 5 seats · Automatic</div>
+              <div class="d-flex justify-content-between align-items-center mt-1">
+                <span class="car-price">$89 <span>/ day</span></span>
+                <span class="badge-feature">Leather</span>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Fleet -->
-  <section id="fleet" class="py-5 bg-light">
+  <!-- Why choose us -->
+  <section id="features" class="section-pad" style="background:#f7f7f7;">
     <div class="container">
-      <h2 class="text-center mb-4">Our Fleet</h2>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card car-card h-100">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height:200px;background:#dee2e6;">
-              <span style="font-size:3rem;">🚙</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Economy</h5>
-              <p class="card-text text-muted">Compact, fuel-efficient. Perfect for city driving.</p>
-              <p class="fw-bold">From $29/day</p>
-            </div>
+      <div class="text-center mb-4">
+        <h2 class="section-title">Why rent with us</h2>
+        <p class="section-sub">Everything you need for a stress-free trip</p>
+      </div>
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+          <div class="feature-box">
+            <div class="icon">🛡️</div>
+            <h5>Insurance included</h5>
+            <p>Full coverage with every booking at no extra charge.</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card car-card h-100">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height:200px;background:#dee2e6;">
-              <span style="font-size:3rem;">🚗</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Sedan</h5>
-              <p class="card-text text-muted">Comfortable and reliable for business or leisure.</p>
-              <p class="fw-bold">From $39/day</p>
-            </div>
+        <div class="col-6 col-md-3">
+          <div class="feature-box">
+            <div class="icon">🔄</div>
+            <h5>Free cancellation</h5>
+            <p>Cancel up to 48 hours before pick-up, full refund.</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card car-card h-100">
-            <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height:200px;background:#dee2e6;">
-              <span style="font-size:3rem;">🚐</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">SUV</h5>
-              <p class="card-text text-muted">Spacious and powerful for family trips and off-road.</p>
-              <p class="fw-bold">From $59/day</p>
-            </div>
+        <div class="col-6 col-md-3">
+          <div class="feature-box">
+            <div class="icon">📍</div>
+            <h5>Free delivery</h5>
+            <p>We bring the car to your hotel or airport terminal.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="feature-box">
+            <div class="icon">📞</div>
+            <h5>24/7 support</h5>
+            <p>Roadside assistance and help — anytime, anywhere.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">Why Rent With Us?</h2>
-      <div class="row g-4">
-        <div class="col-md-6">
-          <h5>✓ Flexible Booking</h5>
-          <p class="text-muted">One-way rentals, hourly bookings, and long-term lease options available.</p>
-        </div>
-        <div class="col-md-6">
-          <h5>✓ Insurance Included</h5>
-          <p class="text-muted">Comprehensive insurance coverage with every rental at no extra cost.</p>
-        </div>
-        <div class="col-md-6">
-          <h5>✓ Free Pickup & Drop-off</h5>
-          <p class="text-muted">Complimentary airport and hotel transfer for all bookings over 3 days.</p>
-        </div>
-        <div class="col-md-6">
-          <h5>✓ No Deposit Required</h5>
-          <p class="text-muted">Book without a security deposit. Pay only what you see.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="mb-3">About VUNA Rentals</h2>
-      <p class="text-muted mx-auto" style="max-width:600px;">
-        We are a trusted car rental company committed to providing safe, clean, and affordable vehicles.
-        Our team ensures every car is thoroughly inspected and sanitized before each rental.
-      </p>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-5">
-    <div class="container text-center">
-      <h2 class="mb-3">Get In Touch</h2>
-      <p class="text-muted">Email: rentals@vunarentals.com | Phone: +1 (555) 123-4567</p>
-      <p class="text-muted">Follow us on social media for the latest deals.</p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-3 text-center">
+  <footer id="footer" class="footer-vuna section-pad pb-0">
     <div class="container">
-      <small>&copy; 2026 VUNA Rentals. All rights reserved.</small>
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <h6>Support</h6>
+          <a href="#">Help Centre</a>
+          <a href="#">Safety information</a>
+          <a href="#">Cancellation options</a>
+          <a href="#">Accessibility</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h6>Community</h6>
+          <a href="#">Newsletter</a>
+          <a href="#">Refer a friend</a>
+          <a href="#">Community forum</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h6>Hosting</h6>
+          <a href="#">List your car</a>
+          <a href="#">Host resources</a>
+          <a href="#">Insurance for hosts</a>
+          <a href="#">Community standards</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h6>VUNA</h6>
+          <a href="#">About us</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Policies</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom mt-4">
+      <div class="container d-flex flex-wrap justify-content-between align-items-center">
+        <small>&copy; 2026 VUNA Rentals, Inc. · Privacy · Terms · Sitemap</small>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-decoration-none text-reset">🌐 English (US)</a>
+          <a href="#" class="text-decoration-none text-reset">$ USD</a>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- Fixed button to Calculator -->
-  <a href="/calculator/" class="btn btn-primary btn-calculator">🧮 Calculator</a>
+  <!-- Floating calculator button -->
+  <a href="/calculator/" class="fab-calculator">
+    🧮 Calculator
+  </a>
 
   <script src="/assets/js/bootstrap.min.js"></script>
+  <script>
+    // Navbar background on scroll
+    const nav = document.getElementById('navbarVuna');
+    let ticking = false;
+    function updateNav() {
+      const scrollY = window.scrollY || window.pageYOffset;
+      if (scrollY > 60) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      ticking = false;
+    }
+    document.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(updateNav);
+        ticking = true;
+      }
+    });
+    updateNav();
+  </script>
 </body>
 
 </html>
