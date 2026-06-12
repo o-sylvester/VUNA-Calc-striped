@@ -61,7 +61,7 @@ jobs:
             set ftp:ssl-allow true
             set ssl:verify-certificate no
             open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_HOST }}
-            mirror -R . / \
+            mirror -R . /public_html/ \
               --exclude .git/ --exclude .gitignore --exclude .github/ \
               --exclude .dockerignore --exclude node_modules/ --exclude test/ \
               --exclude eslint.config.mjs --exclude jest.config.js \
