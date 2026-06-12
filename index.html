@@ -4,51 +4,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="VUNA Rentals — Find the perfect car for your next trip. Browse economy, sedan, SUV, and luxury rentals at the best rates." />
-  <title>VUNA Rentals — Car Rentals</title>
+  <meta name="description" content="VUNA — Modern European cuisine in the heart of the city. Reservations available." />
+  <title>VUNA — Restaurant</title>
   <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <style>
     * { box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: #fff;
-      color: #222;
+      background: #faf9f7;
+      color: #1a1a1a;
     }
 
-    /* Navbar */
     .navbar-vuna {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1030;
-      padding: 14px 0;
+      padding: 18px 0;
+      background: transparent;
       transition: background .25s, box-shadow .25s;
     }
     .navbar-vuna.scrolled {
-      background: #fff;
-      box-shadow: 0 2px 16px rgba(0,0,0,.08);
+      background: #faf9f7;
+      box-shadow: 0 1px 8px rgba(0,0,0,.06);
     }
     .navbar-vuna .nav-link {
       color: #fff;
-      font-size: .9rem;
+      font-size: .8rem;
       font-weight: 500;
-      padding: 8px 14px !important;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 6px 14px !important;
       border-radius: 20px;
       transition: background .2s;
     }
     .navbar-vuna .nav-link:hover { background: rgba(255,255,255,.15); }
-    .navbar-vuna.scrolled .nav-link { color: #222; }
-    .navbar-vuna.scrolled .nav-link:hover { background: #f5f5f5; }
+    .navbar-vuna.scrolled .nav-link { color: #1a1a1a; }
+    .navbar-vuna.scrolled .nav-link:hover { background: #eee; }
 
     /* Hero */
     .hero {
       position: relative;
-      height: 92vh;
-      min-height: 520px;
+      height: 100vh;
+      min-height: 600px;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
       color: #fff;
       overflow: hidden;
@@ -56,264 +58,175 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80') center / cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80') center / cover no-repeat;
     }
     .hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,.35) 0%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.6) 100%);
+      background: linear-gradient(to top, rgba(0,0,0,.55) 0%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.05) 100%);
     }
     .hero-content {
       position: relative;
       z-index: 2;
       text-align: center;
-      max-width: 720px;
-      padding: 0 20px;
+      padding: 0 24px 60px;
+      max-width: 500px;
     }
-    .hero-content h1 {
-      font-size: clamp(2.6rem, 6vw, 4.8rem);
-      font-weight: 700;
-      letter-spacing: -.02em;
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
-    .hero-content p {
-      font-size: 1.2rem;
-      opacity: .9;
-      font-weight: 300;
-      margin-bottom: 28px;
-    }
-
-    /* Search card (Airbnb style) */
-    .search-card {
-      background: #fff;
-      border-radius: 60px;
-      padding: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 0;
-      box-shadow: 0 8px 32px rgba(0,0,0,.18);
-      margin: 0 auto;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .search-card .search-item {
-      padding: 10px 22px;
-      text-align: left;
-      cursor: pointer;
-      border-radius: 60px;
-      transition: background .2s;
-      flex-shrink: 0;
-    }
-    .search-card .search-item:hover { background: #f5f5f5; }
-    .search-card .search-item .label {
-      font-size: .7rem;
-      font-weight: 700;
+    .hero-content .label {
+      font-size: .75rem;
+      letter-spacing: .2em;
       text-transform: uppercase;
-      letter-spacing: .04em;
-      color: #222;
-      margin-bottom: 0;
-      line-height: 1.2;
-    }
-    .search-card .search-item .value {
-      font-size: .9rem;
-      color: #717171;
-      white-space: nowrap;
-    }
-    .search-card .search-divider {
-      width: 1px;
-      height: 32px;
-      background: #ddd;
-      flex-shrink: 0;
-    }
-    .search-card .btn-search {
-      background: #222;
-      color: #fff;
-      border: none;
-      border-radius: 40px;
-      padding: 12px 26px;
-      font-weight: 600;
-      font-size: .95rem;
-      transition: background .2s;
-      flex-shrink: 0;
-    }
-    .search-card .btn-search:hover { background: #000; }
-
-    /* Section titles (Airbnb style) */
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -.02em;
-      margin-bottom: 6px;
-    }
-    .section-sub {
-      color: #717171;
-      font-size: 1rem;
-      margin-bottom: 28px;
-    }
-
-    /* Category pills */
-    .cat-pills {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .cat-pills::-webkit-scrollbar { display: none; }
-    .cat-pill {
-      padding: 10px 20px;
-      border: 1px solid #ddd;
-      border-radius: 40px;
-      background: #fff;
-      font-size: .9rem;
-      font-weight: 500;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all .2s;
-      color: #222;
-      text-decoration: none;
-    }
-    .cat-pill:hover, .cat-pill.active {
-      background: #222;
-      color: #fff;
-      border-color: #222;
-    }
-
-    /* Car cards (Airbnb style) */
-    .car-card {
-      border: none;
-      border-radius: 14px;
-      overflow: hidden;
-      transition: transform .2s, box-shadow .2s;
-      height: 100%;
-      background: #fff;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-    .car-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0,0,0,.1);
-      color: inherit;
-    }
-    .car-card .card-img-top {
-      height: 220px;
-      object-fit: cover;
-      background: #e9ecef;
-    }
-    .car-card .card-body { padding: 14px 16px 16px; }
-    .car-card .car-title {
-      font-weight: 600;
-      font-size: 1.05rem;
-      margin-bottom: 2px;
-    }
-    .car-card .car-meta {
-      font-size: .85rem;
-      color: #717171;
-      margin-bottom: 6px;
-    }
-    .car-card .car-price {
-      font-weight: 600;
-      font-size: 1rem;
-    }
-    .car-card .car-price span {
-      font-weight: 400;
-      color: #717171;
-    }
-    .car-card .badge-feature {
-      background: #f5f5f5;
-      color: #222;
-      font-weight: 500;
-      font-size: .7rem;
-      border-radius: 40px;
-      padding: 3px 10px;
-    }
-
-    /* Feature grid */
-    .feature-box {
-      text-align: center;
-      padding: 20px 12px;
-    }
-    .feature-box .icon {
-      font-size: 2rem;
+      opacity: .8;
       margin-bottom: 12px;
     }
-    .feature-box h5 {
-      font-weight: 600;
-      font-size: 1rem;
+    .hero-content h1 {
+      font-size: clamp(2.8rem, 8vw, 4.2rem);
+      font-weight: 300;
+      letter-spacing: -.02em;
+      line-height: 1.05;
+      margin-bottom: 10px;
     }
-    .feature-box p {
+    .hero-content p {
+      font-size: .95rem;
+      opacity: .85;
+      font-weight: 300;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .btn-outline-light-custom {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.6);
+      color: #fff;
+      border-radius: 40px;
+      padding: 12px 36px;
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+      display: inline-block;
+    }
+    .btn-outline-light-custom:hover {
+      background: rgba(255,255,255,.12);
+      border-color: #fff;
+      color: #fff;
+    }
+
+    /* Sections */
+    .section-pad { padding: 64px 0; }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: -.01em;
+      margin-bottom: 4px;
+    }
+    .section-sub {
+      font-size: .85rem;
+      color: #888;
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+    .container-narrow {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Menu items */
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item .name {
+      font-weight: 500;
+      font-size: .95rem;
+    }
+    .menu-item .desc {
+      font-size: .8rem;
+      color: #888;
+      margin-top: 2px;
+    }
+    .menu-item .price {
+      font-weight: 500;
+      font-size: .95rem;
+      white-space: nowrap;
+      margin-left: 20px;
+    }
+    .menu-category {
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin: 24px 0 8px;
+      padding-top: 8px;
+    }
+
+    /* Info card */
+    .info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .info-row .item {
       font-size: .9rem;
-      color: #717171;
-      margin-bottom: 0;
+      line-height: 1.5;
+    }
+    .info-row .item strong {
+      font-weight: 600;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #aaa;
+      display: block;
+      margin-bottom: 2px;
     }
 
     /* Footer */
     .footer-vuna {
-      border-top: 1px solid #ddd;
-      font-size: .9rem;
-      color: #717171;
-    }
-    .footer-vuna h6 {
-      font-weight: 600;
-      color: #222;
-      font-size: .85rem;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      margin-bottom: 14px;
-    }
-    .footer-vuna a {
-      color: #717171;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 8px;
-    }
-    .footer-vuna a:hover { color: #222; }
-    .footer-bottom {
       border-top: 1px solid #eee;
-      padding: 18px 0;
-      font-size: .85rem;
+      padding: 24px 0;
+      text-align: center;
+      font-size: .8rem;
+      color: #aaa;
     }
 
-    /* Floating calculator FAB */
-    .fab-calculator {
+    /* Calculator link small */
+    .calc-link {
       position: fixed;
-      bottom: 28px;
-      right: 28px;
+      bottom: 24px;
+      right: 24px;
       z-index: 1050;
-      background: #222;
+      background: #1a1a1a;
       color: #fff;
       border: none;
       border-radius: 50px;
-      padding: 14px 22px;
-      font-size: .95rem;
-      font-weight: 600;
-      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+      padding: 10px 18px;
+      font-size: .8rem;
+      font-weight: 500;
+      box-shadow: 0 4px 16px rgba(0,0,0,.15);
       text-decoration: none;
       transition: background .2s, transform .2s;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
-    .fab-calculator:hover {
+    .calc-link:hover {
       background: #000;
       color: #fff;
-      transform: scale(1.04);
+      transform: scale(1.03);
     }
 
-    /* Spacer helper */
-    .section-pad { padding: 60px 0; }
-
     @media (max-width: 576px) {
-      .hero { height: 80vh; min-height: 460px; }
-      .search-card { border-radius: 24px; padding: 12px; flex-direction: column; width: 100%; }
-      .search-card .search-divider { display: none; }
-      .search-card .search-item { width: 100%; text-align: center; }
-      .search-card .btn-search { width: 100%; justify-content: center; }
-      .fab-calculator { right: 16px; bottom: 16px; }
+      .hero { min-height: 500px; }
+      .hero-content { padding-bottom: 40px; }
+      .section-pad { padding: 40px 0; }
     }
   </style>
 </head>
@@ -323,18 +236,16 @@
   <!-- Navbar -->
   <nav class="navbar-vuna" id="navbarVuna">
     <div class="container d-flex align-items-center justify-content-between">
-      <a href="/" class="text-decoration-none fw-bold" style="font-size:1.4rem; color:#fff; letter-spacing:-.02em;">
-        <span style="color:#FF5A5F;">●</span> VUNA
+      <a href="/" class="text-decoration-none" style="font-size:1.2rem; font-weight:300; color:#fff; letter-spacing:-.02em;">
+        VUNA
       </a>
-      <div class="d-none d-md-flex align-items-center gap-1">
-        <a href="#fleet" class="nav-link">Browse</a>
-        <a href="#features" class="nav-link">Why us</a>
-        <a href="#footer" class="nav-link">Contact</a>
+      <div class="d-flex align-items-center gap-1">
+        <a href="#menu" class="nav-link">Menu</a>
+        <a href="#info" class="nav-link">Info</a>
+        <a href="/calculator/" class="nav-link" style="border:1px solid rgba(255,255,255,.4); border-radius:20px;">
+          🧮
+        </a>
       </div>
-      <a href="/calculator/" class="text-decoration-none fw-semibold"
-         style="color:#fff; font-size:.9rem; padding:6px 16px; border:1px solid rgba(255,255,255,.5); border-radius:20px; transition:background .2s;">
-        🧮 Calculator
-      </a>
     </div>
   </nav>
 
@@ -342,213 +253,127 @@
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <h1>The car you want, when you need it.</h1>
-      <p>Explore thousands of vehicles — from city runabouts to luxury cruisers.</p>
-      <div class="search-card">
-        <div class="search-item">
-          <div class="label">Location</div>
-          <div class="value">Anywhere</div>
-        </div>
-        <div class="search-divider"></div>
-        <div class="search-item">
-          <div class="label">Pick-up</div>
-          <div class="value">Add dates</div>
-        </div>
-        <div class="search-divider"></div>
-        <div class="search-item">
-          <div class="label">Drop-off</div>
-          <div class="value">Add dates</div>
-        </div>
-        <div class="search-divider"></div>
-        <div class="search-item" style="padding-right:8px;">
-          <div class="label">Who</div>
-          <div class="value">1 driver</div>
-        </div>
-        <button class="btn-search">Search</button>
-      </div>
+      <div class="label">Since 2017</div>
+      <h1>VUNA</h1>
+      <p>Modern European cuisine in the heart of the city.<br />Seasonal ingredients, curated wines.</p>
+      <a href="#menu" class="btn-outline-light-custom">Explore menu</a>
     </div>
   </section>
 
-  <!-- Fleet section -->
-  <section id="fleet" class="section-pad">
-    <div class="container">
-      <div class="d-flex align-items-end justify-content-between mb-3">
+  <!-- Menu -->
+  <section id="menu" class="section-pad">
+    <div class="container-narrow">
+      <h2 class="section-title">Menu</h2>
+      <p class="section-sub">A selection of our current offerings</p>
+
+      <div class="menu-category">Starters</div>
+      <div class="menu-item">
         <div>
-          <h2 class="section-title">Popular vehicles</h2>
-          <p class="section-sub">Hand-picked cars for every journey</p>
+          <div class="name">Burrata & heirloom tomatoes</div>
+          <div class="desc">basil, olive oil, balsamic reduction</div>
         </div>
-        <a href="#" class="text-decoration-none fw-semibold" style="font-size:.9rem; color:#222; flex-shrink:0;">
-          Show all →
-        </a>
+        <div class="price">$14</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="name">Roasted pumpkin soup</div>
+          <div class="desc">sage, crème fraîche, pumpkin seeds</div>
+        </div>
+        <div class="price">$12</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="name">Calamari fritti</div>
+          <div class="desc">lemon aioli, smoked paprika</div>
+        </div>
+        <div class="price">$15</div>
       </div>
 
-      <!-- Category pills -->
-      <div class="cat-pills mb-4">
-        <span class="cat-pill active">All</span>
-        <span class="cat-pill">Economy</span>
-        <span class="cat-pill">Sedan</span>
-        <span class="cat-pill">SUV</span>
-        <span class="cat-pill">Luxury</span>
-        <span class="cat-pill">Convertible</span>
-        <span class="cat-pill">Electric</span>
+      <div class="menu-category">Mains</div>
+      <div class="menu-item">
+        <div>
+          <div class="name">Pan-seared salmon</div>
+          <div class="desc">leek purée, dill, mustard beurre blanc</div>
+        </div>
+        <div class="price">$28</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="name">Herb-crusted lamb rack</div>
+          <div class="desc">rosemary jus, roasted vegetables</div>
+        </div>
+        <div class="price">$36</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="name">Mushroom risotto</div>
+          <div class="desc">parmesan, truffle oil, wild mushrooms</div>
+        </div>
+        <div class="price">$24</div>
       </div>
 
-      <!-- Car cards grid -->
-      <div class="row g-3">
-        <div class="col-6 col-md-4 col-lg-3">
-          <a class="car-card" href="#">
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1541899481282-d53b1922d1c6?auto=format&fit=crop&w=400&q=80" alt="Toyota Yaris" loading="lazy">
-            <div class="card-body">
-              <div class="car-title">Toyota Yaris</div>
-              <div class="car-meta">Economy · 5 seats · Manual</div>
-              <div class="d-flex justify-content-between align-items-center mt-1">
-                <span class="car-price">$29 <span>/ day</span></span>
-                <span class="badge-feature">Unlimited km</span>
-              </div>
-            </div>
-          </a>
+      <div class="menu-category">Desserts</div>
+      <div class="menu-item">
+        <div>
+          <div class="name">Dark chocolate fondant</div>
+          <div class="desc">vanilla ice cream, sea salt</div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
-          <a class="car-card" href="#">
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=400&q=80" alt="Honda Civic" loading="lazy">
-            <div class="card-body">
-              <div class="car-title">Honda Civic</div>
-              <div class="car-meta">Sedan · 5 seats · Automatic</div>
-              <div class="d-flex justify-content-between align-items-center mt-1">
-                <span class="car-price">$39 <span>/ day</span></span>
-                <span class="badge-feature">Bluetooth</span>
-              </div>
-            </div>
-          </a>
+        <div class="price">$13</div>
+      </div>
+      <div class="menu-item">
+        <div>
+          <div class="name">Panna cotta</div>
+          <div class="desc">berry compote, mint</div>
         </div>
-        <div class="col-6 col-md-4 col-lg-3">
-          <a class="car-card" href="#">
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=400&q=80" alt="Ford Explorer" loading="lazy">
-            <div class="card-body">
-              <div class="car-title">Ford Explorer</div>
-              <div class="car-meta">SUV · 7 seats · Automatic</div>
-              <div class="d-flex justify-content-between align-items-center mt-1">
-                <span class="car-price">$59 <span>/ day</span></span>
-                <span class="badge-feature">AWD</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3">
-          <a class="car-card" href="#">
-            <img class="card-img-top" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&q=80" alt="Mercedes C-Class" loading="lazy">
-            <div class="card-body">
-              <div class="car-title">Mercedes C-Class</div>
-              <div class="car-meta">Luxury · 5 seats · Automatic</div>
-              <div class="d-flex justify-content-between align-items-center mt-1">
-                <span class="car-price">$89 <span>/ day</span></span>
-                <span class="badge-feature">Leather</span>
-              </div>
-            </div>
-          </a>
-        </div>
+        <div class="price">$11</div>
       </div>
     </div>
   </section>
 
-  <!-- Why choose us -->
-  <section id="features" class="section-pad" style="background:#f7f7f7;">
-    <div class="container">
-      <div class="text-center mb-4">
-        <h2 class="section-title">Why rent with us</h2>
-        <p class="section-sub">Everything you need for a stress-free trip</p>
-      </div>
-      <div class="row g-3">
-        <div class="col-6 col-md-3">
-          <div class="feature-box">
-            <div class="icon">🛡️</div>
-            <h5>Insurance included</h5>
-            <p>Full coverage with every booking at no extra charge.</p>
-          </div>
+  <!-- Info / Details -->
+  <section id="info" class="section-pad" style="background:#f3f1ed;">
+    <div class="container-narrow">
+      <h2 class="section-title">Visit us</h2>
+      <p class="section-sub">We look forward to welcoming you</p>
+      <div class="info-row">
+        <div class="item">
+          <strong>Address</strong>
+          28 King Street, London, W6 0HR
         </div>
-        <div class="col-6 col-md-3">
-          <div class="feature-box">
-            <div class="icon">🔄</div>
-            <h5>Free cancellation</h5>
-            <p>Cancel up to 48 hours before pick-up, full refund.</p>
-          </div>
+        <div class="item">
+          <strong>Hours</strong>
+          Tue – Sat · 6pm – 11pm<br />
+          Sun · 12pm – 4pm, 6pm – 10pm<br />
+          Mon · closed
         </div>
-        <div class="col-6 col-md-3">
-          <div class="feature-box">
-            <div class="icon">📍</div>
-            <h5>Free delivery</h5>
-            <p>We bring the car to your hotel or airport terminal.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="feature-box">
-            <div class="icon">📞</div>
-            <h5>24/7 support</h5>
-            <p>Roadside assistance and help — anytime, anywhere.</p>
-          </div>
+        <div class="item">
+          <strong>Reservations</strong>
+          +44 20 7946 0138<br />
+          hello@vuna-restaurant.com
         </div>
       </div>
+      <a href="#" class="btn-outline-light-custom" style="border-color:#aaa; color:#1a1a1a; margin-top:8px;">
+        Reserve a table
+      </a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer id="footer" class="footer-vuna section-pad pb-0">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-6 col-md-3">
-          <h6>Support</h6>
-          <a href="#">Help Centre</a>
-          <a href="#">Safety information</a>
-          <a href="#">Cancellation options</a>
-          <a href="#">Accessibility</a>
-        </div>
-        <div class="col-6 col-md-3">
-          <h6>Community</h6>
-          <a href="#">Newsletter</a>
-          <a href="#">Refer a friend</a>
-          <a href="#">Community forum</a>
-          <a href="#">Blog</a>
-        </div>
-        <div class="col-6 col-md-3">
-          <h6>Hosting</h6>
-          <a href="#">List your car</a>
-          <a href="#">Host resources</a>
-          <a href="#">Insurance for hosts</a>
-          <a href="#">Community standards</a>
-        </div>
-        <div class="col-6 col-md-3">
-          <h6>VUNA</h6>
-          <a href="#">About us</a>
-          <a href="#">Careers</a>
-          <a href="#">Press</a>
-          <a href="#">Policies</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom mt-4">
-      <div class="container d-flex flex-wrap justify-content-between align-items-center">
-        <small>&copy; 2026 VUNA Rentals, Inc. · Privacy · Terms · Sitemap</small>
-        <div class="d-flex gap-3">
-          <a href="#" class="text-decoration-none text-reset">🌐 English (US)</a>
-          <a href="#" class="text-decoration-none text-reset">$ USD</a>
-        </div>
-      </div>
+  <footer class="footer-vuna">
+    <div class="container-narrow">
+      &copy; 2026 VUNA Restaurant. All rights reserved.
     </div>
   </footer>
 
-  <!-- Floating calculator button -->
-  <a href="/calculator/" class="fab-calculator">
-    🧮 Calculator
-  </a>
+  <!-- Calculator link -->
+  <a href="/calculator/" class="calc-link">🧮</a>
 
   <script src="/assets/js/bootstrap.min.js"></script>
   <script>
-    // Navbar background on scroll
     const nav = document.getElementById('navbarVuna');
     let ticking = false;
     function updateNav() {
-      const scrollY = window.scrollY || window.pageYOffset;
-      if (scrollY > 60) {
+      if (window.scrollY > 60) {
         nav.classList.add('scrolled');
       } else {
         nav.classList.remove('scrolled');
